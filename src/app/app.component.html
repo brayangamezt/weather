@@ -1,0 +1,65 @@
+<header>
+	<span><i class="fas fa-globe-americas"></i></span>
+	<p>Weather world</p>
+</header>
+<div id="resume">
+	<p>In world weather you can find the climate of the city</p>
+	<p>you want just typing the name and code in the form shown below</p>
+	<p>also you have current weather location on the stats below</p>
+</div>
+<section id="information-1">
+	<div id="first" *ngIf="weatherLocation">
+		<i class="fas fa-map-marker-alt"></i>
+		<p>Ubicación: {{weatherLocation.name}}</p>
+	</div>
+	<div id="second" *ngIf="weatherLocation">
+		<i class="fas fa-sun"></i>
+		<p>Temperatura: {{weatherLocation.main.temp}}º</p>
+	</div>
+	<div id="third" *ngIf="weatherLocation">
+		<span><i class="fas fa-temperature-high"></i><i class="fas fa-temperature-low"></i></span>
+		<p>Max/Min: {{weatherLocation.main.temp_max}}º / {{weatherLocation.main.temp_min}} º</p>
+	</div>
+	<div id="fourd"*ngIf="weatherLocation">
+		<i class="fas fa-water"></i>
+		<p>Humedad: {{weatherLocation.main.humidity}}</p>
+	</div>
+</section>
+
+
+<main>
+	<div id="container">
+		<section>
+			<div class="bxslider">
+				<div><img src="../assets/img/egipto.jpg" height="350px"></div>
+				<div><img src="../assets/img/londres.jpg"height="350px"></div>
+				<div><img src="../assets/img/newyork.jpeg" height="350px"></div>
+			</div>
+		</section>
+		<div id="result">
+			<form id="form" #dataForm="ngForm" (ngSubmit)="submitLocation(dataForm)" >
+				<div >
+					<label for="city" >Ciudad/City</label><br>
+					<input type="text" name="city" placeholder="Ejemplo: Hermosillo" #name="ngModel" [(ngModel)]="ciudad" required>
+					<span *ngIf="name.touched && !name.valid" class="error">El nombre es obligatorio *</span>
+				</div><br>
+				<div >
+					<label for="code" >Codigo de pais/Country code</label><br>
+					<input type="text" name="code"  placeholder="Ej: MX (mexico)" #countryCode="ngModel" [(ngModel)]="code" required>
+					<span *ngIf="countryCode.touched && !countryCode.valid" class="error">El nombre es obligatorio *</span>
+				</div><br>
+				<button type="submit">Obtener</button>
+			</form>
+			<div id="results">
+				<p>Ciudad: <span *ngIf="weather"><strong>{{weather.name}}</strong></span></p>
+				<p>Temperatura: <span *ngIf="weather"><strong>{{weather.main.temp}}º</strong></span></p>
+				<p>Sensacion termica: <span *ngIf="weather"><strong>{{weather.main.feels_like}}º</strong></span></p>
+				<p>Humedad: <span *ngIf="weather"><strong>{{weather.main.humidity}} %</strong></span></p>
+				<p>Presion: <span *ngIf="weather"><strong>{{weather.main.pressure}} Pas</strong></span></p>
+			</div>
+		</div>
+	</div>
+</main>
+
+
+
